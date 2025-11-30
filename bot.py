@@ -298,7 +298,7 @@ async def handle_purpose_text(update: Update, context: ContextTypes.DEFAULT_TYPE
 def main():
     """Основная функция"""
     print("🚀 Запуск MGX-PC бота...")
-    print(f"✅ BOT_TOKEN: {'***' + BOT_TOKEN[-4:] if BOT_TOKEN else 'НЕ УСТАНОВЛЕН'}")
+    print(f"✅ BOT_TOKEN: ***{BOT_TOKEN[-4:]}")
     print(f"✅ ADMIN_IDS: {ADMIN_IDS}")
     
     try:
@@ -315,11 +315,5 @@ def main():
         application.run_polling()
         
     except Exception as e:
-        print(f"❌ Критическая ошибка: {e}")
-        # Перезапуск через 10 секунд
-        import time
-        time.sleep(10)
-        main()
-
-if __name__ == '__main__':
-    main()
+        print(f"❌ Ошибка в боте: {e}")
+        # Не перезапускаем автоматически, Flask будет держать порт открытым
