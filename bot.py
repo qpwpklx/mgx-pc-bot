@@ -299,15 +299,21 @@ def main():
     """Основная функция"""
     print("🚀 Запуск MGX-PC бота...")
     
-    application = Application.builder().token(BOT_TOKEN).build()
-    
-    # Обработчики
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CallbackQueryHandler(button_handler))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    
-    # Запуск
-    application.run_polling()
-
-if __name__ == '__main__':
-    main()
+    try:
+        application = Application.builder().token(BOT_TOKEN).build()
+        
+        # Обработчики
+        application.add_handler(CommandHandler("start", start))
+        application.add_handler(CallbackQueryHandler(button_handler))
+        application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+        
+        # Запуск
+        print("✅ Бот запускается...")
+        application.run_polling()
+        
+    except Exception as e:
+        print(f"❌ Ошибка запуска: {e}")
+        # Перезапуск через 10 секунд
+        import time
+        time.sleep(10)
+        main()
