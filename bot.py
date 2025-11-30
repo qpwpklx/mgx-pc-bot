@@ -316,4 +316,10 @@ def main():
         
     except Exception as e:
         print(f"❌ Критическая ошибка: {e}")
-        raise  # Пробрасываем ошибку для перехвата в start_bot.py
+        # Перезапуск через 10 секунд
+        import time
+        time.sleep(10)
+        main()
+
+if __name__ == '__main__':
+    main()
